@@ -148,3 +148,9 @@ imperor('Александр 1').
 imperor('Александр 2').
 imperor('Александр 3').
 imperor('Николай 2').
+
+% lab defense
+murdered('Александр 2').
+murdered('Николай 2').
+murdered('Павел 1').
+orphan(X) :- parent(Y, X), murdered(Y).
