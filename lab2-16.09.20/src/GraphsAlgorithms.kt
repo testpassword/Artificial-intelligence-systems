@@ -13,7 +13,7 @@ object GraphsAlgorithms {
      * @link https://ru.haru-atari.com/blog/17-algorithms-on-graphs-deep-first-search-dfs-dls-iddfs
      * @link https://stackoverflow.com/questions/12864004/tracing-and-returning-a-path-in-depth-first-search
      */
-    fun DFS(start: Vertex, finish: Vertex, limit: Int = Int.MAX_VALUE): Pair<List<Vertex>, Int> {
+    fun depthFirstSearch(start: Vertex, finish: Vertex, limit: Int = Int.MAX_VALUE): Pair<List<Vertex>, Int> {
         val path = Stack<Vertex>()
         //необходимо использовать вложенную функцию, чтобы создать замыкания для переменной path
         fun innerDFS(current: Vertex, limit: Int, visited: Set<Vertex> = setOf()): Boolean =
@@ -21,7 +21,7 @@ object GraphsAlgorithms {
                 current == finish -> true
                 limit == 0 -> false
                 else -> {
-                    current.getNeighbors().filter { it !in visited }.forEach {
+                    current.getNeighbors().keys.filter { it !in visited }.forEach {
                         if (innerDFS(it, limit - 1, visited + current)) {
                             path.push(it)
                             return true
@@ -34,13 +34,14 @@ object GraphsAlgorithms {
         return path.reversed() to path.size - 1 //вычитаем из длины пути вершину, из которой начали поиск
     }
 
+    //TODO: parents[last] != start
     /**
      * Алгоритм поиска в ширину на графах.
      * @return путь от [start] до [finish] и его длину.
      * @link https://www.fandroid.info/8-5-osnovy-kotlin-grafy/4/
      * @link https://brestprog.by/topics/bfs/
      */
-    fun BFS(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
+    fun breadthFirstSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
         val queue = Stack<Vertex>().apply { this.push(start) }
         val parents = mutableMapOf<Vertex, Vertex?>(start to null) //ключ - вершина, значение - родитель
         val visited = mutableSetOf(start)
@@ -55,7 +56,7 @@ object GraphsAlgorithms {
                 }
                 return path.reversed() to path.size - 1
             }
-            next.getNeighbors().filter { it !in visited }.forEach {
+            next.getNeighbors().keys.filter { it !in visited }.forEach {
                 queue.add(it)
                 parents[it] = next
             } }
@@ -63,18 +64,18 @@ object GraphsAlgorithms {
     }
 
     /**
-     * Алгоритм поиск с итеративным углублением. Использует в своей реализации [DFS].
+     * Алгоритм поиск с итеративным углублением. Использует в своей реализации [breadthFirstSearch].
      * @return путь от [start] до [finish] и его длину.
      */
-    fun IDDFS(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> =
-        generateSequence(1) { it + 1 }.map { DFS(start, finish, it) }.find { it.first.size > 1 }?: listOf(start) to 0
+    fun iterativeDeepeningDepthFirstSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> =
+        generateSequence(1) { it + 1 }.map { depthFirstSearch(start, finish, it) }.find { it.first.size > 1 }?: listOf(start) to 0
 
     /**
      * Алгоритм двунаправленного поиск в графе.
      * @return путь от [start] до [finish] и его длину.
      * @link https://www.geeksforgeeks.org/bidirectional-search/
      */
-    fun BDS(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
+    fun bidirectionalSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
         val sData = Triple(
             mutableListOf(start),                               //очередь
             mutableSetOf(start),                                //посещённые вершины
@@ -87,8 +88,8 @@ object GraphsAlgorithms {
         )
         fun innerBFS(vertexData: Triple<MutableList<Vertex>, MutableSet<Vertex>, MutableMap<Vertex, Vertex?>>) {
             val current = vertexData.first.first()
-            vertexData.first.removeAt(0)
-            current.getNeighbors().filter { it !in vertexData.second }.forEach {
+            vertexData.first.removeFirst()
+            current.getNeighbors().keys.filter { it !in vertexData.second }.forEach {
                 vertexData.third[it] = current
                 vertexData.second.add(it)
                 vertexData.first.add(it)
@@ -99,23 +100,63 @@ object GraphsAlgorithms {
             innerBFS(fData)
             val intersectVertices = sData.second intersect fData.second
             if (intersectVertices.isNotEmpty()) {
-                val path = mutableListOf<Vertex>()
-                var intersect: Vertex? = intersectVertices.first()
-                while (intersect != start) {
-                    val parent = sData.third[intersect] ?: break
-                    path.add(parent)
-                    intersect = parent
+                val path = mutableListOf(intersectVertices.first())
+                fun buildHalfPath(v: Vertex, data: Triple<MutableList<Vertex>, MutableSet<Vertex>, MutableMap<Vertex, Vertex?>>) {
+                    var intersect = intersectVertices.first()
+                    while (intersect != v) {
+                        val parent = data.third[intersect]?: break
+                        path.add(parent)
+                        intersect = parent
+                    }
                 }
+                buildHalfPath(start, sData)
                 path.reverse()
-                intersect = intersectVertices.first()
-                while (intersect != finish) {
-                    val parent = sData.third[intersect]?: break
-                    path.add(parent)
-                    intersect = parent
-                }
+                buildHalfPath(finish, fData)
                 return path to path.size - 1
             }
         }
         return listOf(start) to 0
+    }
+
+    /**
+     * Алгоритм жадного поиска на графах по первому наилучшему соответствию.
+     * @return путь от [start] до [finish] и его длину.
+     * @link https://www.annytab.com/best-first-search-algorithm-in-python/
+     */
+    fun bestFirstSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
+        val queue = mutableListOf(start)
+        val visited = mutableSetOf<Vertex>()
+        val parents = mutableMapOf<Vertex, Vertex?>(start to null)
+        while (queue.isNotEmpty()) {
+            queue.sortBy { it.heuristicMark }
+            var current = queue.removeFirstOrNull()
+            visited.add(current!!)
+            if (current == finish) {
+                val path = mutableListOf<Vertex>()
+                var roadLength = 0
+                while (current != null) {
+                    path.add(current)
+                    val parent = parents[current]
+                    roadLength += current.getNeighbors()[parent]?: 0
+                    current = parent
+                }
+                return path.reversed() to roadLength
+            }
+            current.getNeighbors().keys.filter { it !in visited }.forEach { v ->
+                if (queue.none { v == it && v.heuristicMark >= it.heuristicMark }) {
+                    queue.add(v)
+                    parents[v] = current
+                }
+            }
+        }
+        return listOf(start) to 0
+    }
+
+    /**
+     * Поиск методом минимизации суммарной оценки А* на графах.
+     * @return путь от [start] до [finish] и его длину.
+     */
+    fun A_StarSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
+        TODO()
     }
 }

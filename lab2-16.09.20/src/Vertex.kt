@@ -2,9 +2,10 @@
  * Вершина графа. [name] - название вершины.
  * @author Кульбако Артемий
  */
-data class Vertex(val name: String) {
+data class Vertex(val name: String): Comparable<Vertex> {
 
     private val neighbors = mutableMapOf<Vertex, Int>()
+    var heuristicMark: Int = 0
 
     /**
      * Соединить вершину с вершиной [v]. [length] - вес ребра.
@@ -29,7 +30,9 @@ data class Vertex(val name: String) {
     }
 
     /**
-     * Получить прямых соседей вершины, без возможности редактировать их, во избежание нарушения целостности графа.
+     * @return прямых соседей вершины, без возможности редактировать их, во избежание нарушения целостности графа.
      */
-    fun getNeighbors() = this.neighbors.keys.toSet()
+    fun getNeighbors() = this.neighbors.toMap()
+
+    override fun compareTo(other: Vertex) = this.heuristicMark - other.heuristicMark
 }
