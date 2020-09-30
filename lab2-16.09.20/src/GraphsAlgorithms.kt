@@ -1,6 +1,5 @@
 import java.util.*
 
-
 /**
  * Содержит методы для поиска пути в графе.
  * @author Кульбако Артемий.
@@ -8,7 +7,7 @@ import java.util.*
 object GraphsAlgorithms {
 
     /**
-     * Алгоритм поиск в глубину на графах с ограничением глубины [limit] (DFS и DLS).
+     * Алгоритм поиск в глубину на графах.
      * @return путь от [start] до [finish] и его длину.
      * @link https://ru.haru-atari.com/blog/17-algorithms-on-graphs-deep-first-search-dfs-dls-iddfs
      * @link https://stackoverflow.com/questions/12864004/tracing-and-returning-a-path-in-depth-first-search
@@ -34,7 +33,6 @@ object GraphsAlgorithms {
         return path.reversed() to path.size - 1 //вычитаем из длины пути вершину, из которой начали поиск
     }
 
-    //TODO: parents[last] != start
     /**
      * Алгоритм поиска в ширину на графах.
      * @return путь от [start] до [finish] и его длину.
@@ -47,14 +45,10 @@ object GraphsAlgorithms {
         val visited = mutableSetOf(start)
         while (queue.isNotEmpty()) {
             val next = queue.pop()
+            visited.add(next)
             if (next == finish) {
-                var last = finish
-                val path = mutableListOf(last)
-                while (parents[last] != null) {
-                    last = parents[last]!!
-                    path.add(last)
-                }
-                return path.reversed() to path.size - 1
+                val path = generateSequence(next) { parents[it] }.toList().reversed()
+                return path to path.size - 1
             }
             next.getNeighbors().keys.filter { it !in visited }.forEach {
                 queue.add(it)
@@ -62,6 +56,12 @@ object GraphsAlgorithms {
             } }
         return listOf(start) to 0
     }
+
+    /**
+     * Алгоритм поиск в глубину на графах с ограничением глубины [limit].
+     * @return путь от [start] до [finish] и его длину.
+     */
+    fun depthLimitSearch(start: Vertex, finish: Vertex, limit: Int) = depthFirstSearch(start, finish, limit)
 
     /**
      * Алгоритм поиск с итеративным углублением. Использует в своей реализации [breadthFirstSearch].
@@ -118,6 +118,19 @@ object GraphsAlgorithms {
         return listOf(start) to 0
     }
 
+    private fun buildInformPath(parents: Map<Vertex, Vertex?>, lastVertex: Vertex?): Pair<List<Vertex>, Int> {
+        var current = lastVertex
+        val path = mutableListOf<Vertex>()
+        var roadLength = 0
+        while (current != null) {
+            path.add(current)
+            val parent = parents[current]
+            roadLength += current.getNeighbors()[parent]?: 0
+            current = parent
+        }
+        return path.reversed() to roadLength
+    }
+
     /**
      * Алгоритм жадного поиска на графах по первому наилучшему соответствию.
      * @return путь от [start] до [finish] и его длину.
@@ -128,22 +141,16 @@ object GraphsAlgorithms {
         val visited = mutableSetOf<Vertex>()
         val parents = mutableMapOf<Vertex, Vertex?>(start to null)
         while (queue.isNotEmpty()) {
-            queue.sortBy { it.heuristicMark }
-            var current = queue.removeFirstOrNull()
+            queue.sortByDescending { it.h }
+            /*
+            Перевернуть очередь необходимо, т.к. я по ошибке определил эвристику в виде пути по прямой от Риги до Уфы,
+            а не от Уфы до Риги. Без него алгоритм всё-равно отработает верно, но с большим количеством шагов
+             */
+            val current = queue.removeFirstOrNull()
             visited.add(current!!)
-            if (current == finish) {
-                val path = mutableListOf<Vertex>()
-                var roadLength = 0
-                while (current != null) {
-                    path.add(current)
-                    val parent = parents[current]
-                    roadLength += current.getNeighbors()[parent]?: 0
-                    current = parent
-                }
-                return path.reversed() to roadLength
-            }
+            if (current == finish) return buildInformPath(parents, current)
             current.getNeighbors().keys.filter { it !in visited }.forEach { v ->
-                if (queue.none { v == it && v.heuristicMark >= it.heuristicMark }) {
+                if (queue.none { v == it && v.h >= it.h }) {
                     queue.add(v)
                     parents[v] = current
                 }
@@ -155,8 +162,26 @@ object GraphsAlgorithms {
     /**
      * Поиск методом минимизации суммарной оценки А* на графах.
      * @return путь от [start] до [finish] и его длину.
+     * @link https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
      */
     fun A_StarSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
-        TODO()
+        //используем очередь с приоритетом, чтобы автоматически сортировать очередь по параметру Vertex.f
+        val queue = PriorityQueue<Vertex>().apply { this.add(start) }
+        val visited = mutableSetOf<Vertex>()
+        val parents = mutableMapOf<Vertex, Vertex?>(start to null)
+        while (queue.isNotEmpty()) {
+            val current = queue.poll()
+            println(queue)
+            visited.add(current)
+            if (current == finish) return buildInformPath(parents, current)
+            current.getNeighbors().keys.filter { it !in visited }.forEach { v ->
+                v.g = current.getNeighbors()[v]?: 0
+                if (queue.none { v == it && v.g >= it.g }) {
+                    queue.add(v)
+                    parents[v] = current
+                }
+            }
+        }
+        return listOf(start) to 0
     }
 }

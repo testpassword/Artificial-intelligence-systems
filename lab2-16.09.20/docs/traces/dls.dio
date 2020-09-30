@@ -1,0 +1,157 @@
+<mxfile host="cc423992-b2a7-4835-aeca-b6253fbd00ed" modified="2020-09-30T11:51:23.771Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.49.2 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36" etag="YR8KP89Vvb7ZfU7wBw50" version="13.1.3">
+    <diagram id="6hGFLwfOUW9BJ-s0fimq" name="Page-1">
+        <mxGraphModel dx="992" dy="577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="Рига" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006633;" parent="1" vertex="1">
+                    <mxGeometry x="280" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="190" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="340" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="470" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="Каунас" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="420" y="120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="СПб" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006633;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Таллин" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#990000;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#990000&quot;&gt;Тупик&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="140" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="8" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="190" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="8" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="340" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="8" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="500" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="Москва" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006633;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Мурманск" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Витебск" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Калиниград" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="590" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="8" target="19" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="420" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="17" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="190" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Казань" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006633;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Минск" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="23" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="250" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="23" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="220" y="585" as="sourcePoint"/>
+                        <mxPoint x="110" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="Москва" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#990000;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="Ярославль" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#990000;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#990000&quot;&gt;Достигнут лимит глубины&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="550" width="270" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="" style="endArrow=classic;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="16" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="290" y="320" as="sourcePoint"/>
+                        <mxPoint x="350" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="16" target="35" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="455" y="490" as="sourcePoint"/>
+                        <mxPoint x="505" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="Ниж. Новгород" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Орёл" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="420" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="Минск" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#050505;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="16" target="34" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="340" y="310" as="sourcePoint"/>
+                        <mxPoint x="550" y="350" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="" style="endArrow=classic;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="16" target="38" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="500" y="400" as="sourcePoint"/>
+                        <mxPoint x="550" y="350" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="22" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="570" y="650" as="sourcePoint"/>
+                        <mxPoint x="400" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" value="Уфа" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006633;" parent="1" vertex="1">
+                    <mxGeometry x="353.5" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#006633&quot;&gt;Найдено&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="550" width="166.5" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

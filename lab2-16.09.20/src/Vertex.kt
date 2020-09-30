@@ -5,7 +5,18 @@
 data class Vertex(val name: String): Comparable<Vertex> {
 
     private val neighbors = mutableMapOf<Vertex, Int>()
-    var heuristicMark: Int = 0
+    var g = 0
+    set(value) {
+        field += value
+        f = value + h
+    }
+    var h = 0
+    set(value) {
+        field = value
+        f = value + g
+    }
+    var f = 0
+        private set
 
     /**
      * Соединить вершину с вершиной [v]. [length] - вес ребра.
@@ -34,5 +45,10 @@ data class Vertex(val name: String): Comparable<Vertex> {
      */
     fun getNeighbors() = this.neighbors.toMap()
 
-    override fun compareTo(other: Vertex) = this.heuristicMark - other.heuristicMark
+    /**
+     * @return является ли [neighbor] прямым соседом вершины.
+     */
+    operator fun contains(neighbor: Vertex) = neighbors.containsKey(neighbor)
+
+    override fun compareTo(other: Vertex) = this.f - other.f
 }
