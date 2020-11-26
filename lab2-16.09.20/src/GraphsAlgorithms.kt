@@ -8,7 +8,7 @@ object GraphsAlgorithms {
 
     /**
      * Алгоритм поиск в глубину на графах.
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      * @link https://ru.haru-atari.com/blog/17-algorithms-on-graphs-deep-first-search-dfs-dls-iddfs
      * @link https://stackoverflow.com/questions/12864004/tracing-and-returning-a-path-in-depth-first-search
      */
@@ -35,7 +35,7 @@ object GraphsAlgorithms {
 
     /**
      * Алгоритм поиска в ширину на графах.
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      * @link https://www.fandroid.info/8-5-osnovy-kotlin-grafy/4/
      * @link https://brestprog.by/topics/bfs/
      */
@@ -59,20 +59,21 @@ object GraphsAlgorithms {
 
     /**
      * Алгоритм поиск в глубину на графах с ограничением глубины [limit].
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      */
     fun depthLimitSearch(start: Vertex, finish: Vertex, limit: Int) = depthFirstSearch(start, finish, limit)
 
     /**
      * Алгоритм поиск с итеративным углублением. Использует в своей реализации [breadthFirstSearch].
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      */
     fun iterativeDeepeningDepthFirstSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> =
         generateSequence(1) { it + 1 }.map { depthFirstSearch(start, finish, it) }.find { it.first.size > 1 }?: listOf(start) to 0
+        // it.first.size > 1 потому что мы должны проверить не длину пути, а больше ли вершин в пути чем 1
 
     /**
      * Алгоритм двунаправленного поиск в графе.
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      * @link https://www.geeksforgeeks.org/bidirectional-search/
      */
     fun bidirectionalSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
@@ -133,7 +134,7 @@ object GraphsAlgorithms {
 
     /**
      * Алгоритм жадного поиска на графах по первому наилучшему соответствию.
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      * @link https://www.annytab.com/best-first-search-algorithm-in-python/
      */
     fun bestFirstSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
@@ -146,8 +147,8 @@ object GraphsAlgorithms {
             Перевернуть очередь необходимо, т.к. я по ошибке определил эвристику в виде пути по прямой от Риги до Уфы,
             а не от Уфы до Риги. Без него алгоритм всё-равно отработает верно, но с большим количеством шагов
              */
-            val current = queue.removeFirstOrNull()
-            visited.add(current!!)
+            val current = queue.removeFirstOrNull()!!
+            visited.add(current)
             if (current == finish) return buildInformPath(parents, current)
             current.getNeighbors().keys.filter { it !in visited }.forEach { v ->
                 if (queue.none { v == it && v.h >= it.h }) {
@@ -161,7 +162,7 @@ object GraphsAlgorithms {
 
     /**
      * Поиск методом минимизации суммарной оценки А* на графах.
-     * @return путь от [start] до [finish] и его длину.
+     * @return путь от [start] до [finish] и его длину (если веса рёбер не заданы, то они = 1).
      * @link https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
      */
     fun A_StarSearch(start: Vertex, finish: Vertex): Pair<List<Vertex>, Int> {
@@ -171,7 +172,6 @@ object GraphsAlgorithms {
         val parents = mutableMapOf<Vertex, Vertex?>(start to null)
         while (queue.isNotEmpty()) {
             val current = queue.poll()
-            println(queue)
             visited.add(current)
             if (current == finish) return buildInformPath(parents, current)
             current.getNeighbors().keys.filter { it !in visited }.forEach { v ->
